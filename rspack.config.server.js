@@ -9,13 +9,17 @@ const serverConfig = {
   stats: "normal",
   devtool: "eval-source-map",
   target: "node", // in order to ignore built-in modules like path, fs, etc.
-  entry: path.resolve(__dirname, "server", "index.js"),
+  entry: {
+    server: {
+      import: path.resolve(__dirname, "server"),
+      filename: "server/index.js",
+    },
+  },
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "index.js",
     clean: true,
     publicPath: "/",
-    libraryTarget: "umd",
   },
   optimization: {
     minimize: false,

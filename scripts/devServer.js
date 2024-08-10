@@ -11,9 +11,13 @@ const devServer = () => {
   let serverInstance = null;
 
   const launchServer = () => {
-    serverInstance = childProcess.fork(path.join(__dirname, "build"), {
-      stdio: "inherit",
-    });
+    console.log(path.resolve(__dirname, "build", "server"));
+    serverInstance = childProcess.fork(
+      path.resolve(__dirname, "build", "server"),
+      {
+        stdio: "inherit",
+      },
+    );
   };
 
   const compiler = rspack([clientConfig, serverConfig]);
