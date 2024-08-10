@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:client": "NODE_ENV=development rspack --config=rspack.config.client.js",
+    "build:server": "NODE_ENV=development rspack --config=rspack.config.client.js",
     "dev:server": "tsx scripts/devServer.js"
   },
   "author": "",
