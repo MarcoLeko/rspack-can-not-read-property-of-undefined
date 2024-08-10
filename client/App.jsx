@@ -6,7 +6,7 @@ function App() {
     <div>
       <header>
         <p>
-          Hey ho <code>welcome</code> to my reproducable bug.
+          Hey ho <code>welcome</code> to my reproducible bug.
         </p>
         <button onClick={() => setNumber(number + 1)}>Increment number</button>
         <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
@@ -17,4 +17,4 @@ function App() {
   );
 }
 
-export default App;
+export { App };
