@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:server": "tsx scripts/devServer.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "tsx": "^4.17.0"
   }
 }

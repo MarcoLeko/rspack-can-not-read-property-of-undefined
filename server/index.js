@@ -12,6 +12,10 @@ async function createServer() {
   const port = 3_001;
   const app = await prepareServer();
 
+  app.get("/", () => {
+    return { hello: "world" };
+  });
+
   app.listen({ port, host: "::" }, () =>
     process.stdout.write(`Running fast on http://localhost:${port} 🚀\n`),
   );

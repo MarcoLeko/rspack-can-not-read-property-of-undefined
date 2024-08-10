@@ -1,6 +1,7 @@
 const rspack = require("@rspack/core");
-/** @type {import('@rspack/cli').Configuration} */
+const path = require("path");
 
+/** @type {import('@rspack/cli').Configuration} */
 const clientConfig = {
   mode: "development",
   bail: false,
@@ -11,12 +12,12 @@ const clientConfig = {
   },
   entry: {
     client: {
-      import: "./client",
-      filename: "client/index.js",
+      import: path.resolve(__dirname, "client"),
+      filename: path.resolve(__dirname, "client", "index.js"),
     },
   },
   output: {
-    path: "./build",
+    path: path.resolve(__dirname, "dist"),
     clean: true,
     publicPath: "/",
   },
@@ -54,6 +55,7 @@ const clientConfig = {
       },
     ],
   },
+  plugins: [new rspack.ProgressPlugin()].filter(Boolean),
 };
 
 module.exports = clientConfig;

@@ -1,4 +1,5 @@
 const { rspack } = require("@rspack/core");
+const path = require("path");
 
 /** @type {import('@rspack/cli').Configuration} */
 const serverConfig = {
@@ -9,16 +10,16 @@ const serverConfig = {
   target: "node", // in order to ignore built-in modules like path, fs, etc.
   entry: {
     client: {
-      import: "./client",
-      filename: "client/index.js",
+      import: path.resolve(__dirname, "client"),
+      filename: path.resolve(__dirname, "client", "index.js"),
     },
     server: {
-      import: "./sever",
-      filename: "server/index.js",
+      import: path.resolve(__dirname, "server"),
+      filename: path.resolve(__dirname, "server", "index.js"),
     },
   },
   output: {
-    path: "./build",
+    path: path.resolve(__dirname, "build"),
     clean: true,
     publicPath: "/",
   },

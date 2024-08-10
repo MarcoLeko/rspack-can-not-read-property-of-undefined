@@ -4,6 +4,7 @@ const serverConfig = require("../rspack.config.server");
 const childProcess = require("node:child_process");
 const formatWebpackMessages = require("react-dev-utils/formatWebpackMessages");
 const chalk = require("chalk");
+const path = require("node:path");
 
 const isInteractive = process.stdout.isTTY;
 
@@ -11,7 +12,7 @@ const devServer = () => {
   let serverInstance = null;
 
   const launchServer = () => {
-    serverInstance = childProcess.fork(`build/server`, {
+    serverInstance = childProcess.fork(path.join("build", "server"), {
       stdio: "inherit",
     });
   };
