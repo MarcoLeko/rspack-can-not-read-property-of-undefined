@@ -1,0 +1,23 @@
+{
+  "name": "rspack-can-not-read-property-of-undefined",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rspack/cli": "^0.7.5",
+    "@rspack/core": "^0.7.5",
+    "fastify": "^4.28.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+
+  },
+  "devDependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0"
+  }
+}
