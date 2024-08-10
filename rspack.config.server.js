@@ -12,7 +12,7 @@ const serverConfig = {
   entry: path.resolve(__dirname, "server", "index.js"),
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "index.[contenthash:8].js",
+    filename: "index.js",
     clean: true,
     publicPath: "/",
     libraryTarget: "umd",

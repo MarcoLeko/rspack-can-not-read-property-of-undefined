@@ -3,7 +3,6 @@ const clientConfig = require("../rspack.config.client");
 const serverConfig = require("../rspack.config.server");
 const childProcess = require("node:child_process");
 const formatWebpackMessages = require("react-dev-utils/formatWebpackMessages");
-const chalk = require("chalk");
 const path = require("node:path");
 
 const isInteractive = process.stdout.isTTY;
@@ -12,7 +11,7 @@ const devServer = () => {
   let serverInstance = null;
 
   const launchServer = () => {
-    serverInstance = childProcess.fork(path.join("build", "server"), {
+    serverInstance = childProcess.fork(path.join(__dirname, "build"), {
       stdio: "inherit",
     });
   };
@@ -38,24 +37,22 @@ const devServer = () => {
         messages.errors.length = 1;
       }
 
-      console.log(chalk.red("Failed to compile\n"));
-      console.log(messages.errors.join("\n\n"));
+      console.error("Failed to compile\n");
+      console.error(messages.errors.join("\n\n"));
       return;
     }
 
     if (messages.warnings.length) {
-      console.log(chalk.yellow("Compiled with warnings.\n"));
-      console.log(messages.warnings.join("\n\n"));
-      console.log(
-        `\nSearch for the ${chalk.underline(
-          chalk.yellow("keywords"),
-        )} to learn more about each warning.`,
+      console.warn("Compiled with warnings.\n");
+      console.warn(messages.warnings.join("\n\n"));
+      console.warn(
+        `\nSearch for the keywords to learn more about each warning.`,
       );
       console.log(
-        `To ignore, add ${chalk.cyan("// eslint-disable-next-line")} to the line before.\n`,
+        `To ignore, add ${"// eslint-disable-next-line"} to the line before.\n`,
       );
     } else {
-      console.log(chalk.green("Compiled successfully\n"));
+      console.info("Compiled successfully\n");
     }
 
     if (serverInstance) {
