@@ -10,15 +10,11 @@ const clientConfig = {
   resolve: {
     extensions: [".js", ".jsx"],
   },
-  entry: {
-    client: {
-      import: path.resolve(__dirname, "client"),
-      filename: path.resolve(__dirname, "client", "index.js"),
-    },
-  },
+  entry: path.resolve(__dirname, "client", "index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    filename: "index.[contenthash:8].js",
     publicPath: "/",
   },
   module: {
