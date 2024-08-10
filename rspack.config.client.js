@@ -1,5 +1,6 @@
 const rspack = require("@rspack/core");
 const path = require("path");
+const { moduleFileExtensions } = require("./utils");
 
 /** @type {import('@rspack/cli').Configuration} */
 const clientConfig = {
@@ -8,7 +9,7 @@ const clientConfig = {
   stats: "normal",
   devtool: "eval-source-map",
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: moduleFileExtensions.map((extension) => `.${extension}`),
   },
   entry: path.resolve(__dirname, "client", "index.js"),
   output: {
@@ -50,6 +51,7 @@ const clientConfig = {
           options: {
             sourceMap: true,
             jsc: {
+              target: "es2020",
               parser: {
                 syntax: "ecmascript",
                 jsx: true,
@@ -58,7 +60,7 @@ const clientConfig = {
               preserveAllComments: false,
               transform: {
                 react: {
-                  runtime: "classic",
+                  runtime: "automatic",
                   throwIfNamespace: true,
                   useBuiltins: false,
                 },

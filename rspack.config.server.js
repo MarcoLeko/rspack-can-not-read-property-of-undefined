@@ -1,5 +1,6 @@
 const { rspack } = require("@rspack/core");
 const path = require("path");
+const { moduleFileExtensions } = require("./utils");
 
 /** @type {import('@rspack/cli').Configuration} */
 const serverConfig = {
@@ -8,26 +9,19 @@ const serverConfig = {
   stats: "normal",
   devtool: "eval-source-map",
   target: "node", // in order to ignore built-in modules like path, fs, etc.
-  entry: {
-    client: {
-      import: path.resolve(__dirname, "client"),
-      filename: path.resolve(__dirname, "client", "index.js"),
-    },
-    server: {
-      import: path.resolve(__dirname, "server"),
-      filename: path.resolve(__dirname, "server", "index.js"),
-    },
-  },
+  entry: path.resolve(__dirname, "server", "index.js"),
   output: {
     path: path.resolve(__dirname, "build"),
+    filename: "index.[contenthash:8].js",
     clean: true,
     publicPath: "/",
+    libraryTarget: "umd",
   },
   optimization: {
     minimize: false,
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: moduleFileExtensions.map((extension) => `.${extension}`),
   },
   module: {
     parser: {
@@ -37,24 +31,16 @@ const serverConfig = {
     },
     rules: [
       {
-        test: /\.(js|jsx)$/u,
+        test: /\.(js)$/u,
         use: {
           loader: "builtin:swc-loader",
           options: {
             sourceMap: true,
             jsc: {
+              target: "es2020",
               parser: {
                 syntax: "ecmascript",
-                jsx: true,
-              },
-              externalHelpers: true,
-              preserveAllComments: false,
-              transform: {
-                react: {
-                  runtime: "automatic",
-                  throwIfNamespace: true,
-                  useBuiltins: false,
-                },
+                jsx: false,
               },
             },
           },
