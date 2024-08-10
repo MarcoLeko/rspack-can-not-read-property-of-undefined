@@ -1,10 +1,34 @@
 const rspack = require('@rspack/core');
 /** @type {import('@rspack/cli').Configuration} */
-const config = {
+
+const clientConfig = {
+    mode: 'development',
+    bail: false,
+    stats: 'normal',
+    devtool: 'eval-source-map',
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
+    entry: {
+        client: {
+            import: './client',
+            filename: 'client/index.js',
+        },
+    },
+    output: {
+        path: './build',
+        clean: true,
+        publicPath: '/',
+    },
     module: {
+        parser: {
+            javascript: {
+                importExportsPresence: 'error',
+            },
+        },
         rules: [
             {
-                test: /\.jsx$/,
+                test: /\.(js|jsx)$/u,
                 use: {
                     loader: 'builtin:swc-loader',
                     options: {
@@ -32,4 +56,4 @@ const config = {
     },
 };
 
-module.exports = config;
+module.exports = clientConfig;
