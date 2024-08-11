@@ -1,5 +1,6 @@
-import React from "react";
 import { App } from "./App";
-import { render } from "react-dom";
+import { createFragment } from "./createFragment";
 
-render(<App />, document.getElementById("root"));
+const { Fragment } = createFragment(App);
+
+export { Fragment };

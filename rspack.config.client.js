@@ -15,9 +15,10 @@ const clientConfig = {
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    filename: "index.[contenthash:8].js",
+    filename: "index.js",
     publicPath: "/",
     libraryTarget: "umd",
+    globalObject: "(typeof self != 'undefined' ? self : this)",
   },
   module: {
     parser: {
