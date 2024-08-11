@@ -1,6 +1,6 @@
 const { rspack } = require("@rspack/core");
-const clientConfig = require("../rspack.config.client");
-const serverConfig = require("../rspack.config.server");
+const rspackClientConfig = require("../rspack.config.client");
+const rspackServerConfig = require("../rspack.config.server");
 const childProcess = require("node:child_process");
 const formatWebpackMessages = require("react-dev-utils/formatWebpackMessages");
 const path = require("node:path");
@@ -8,7 +8,7 @@ const path = require("node:path");
 const isInteractive = process.stdout.isTTY;
 
 // Custom hot reloading dev server setup using the servers http server framework: Fastify
-const devServer = () => {
+const rspackDevServer = () => {
   let serverInstance = null;
 
   const launchServer = () => {
@@ -17,7 +17,7 @@ const devServer = () => {
     });
   };
 
-  const compiler = rspack([clientConfig, serverConfig]);
+  const compiler = rspack([rspackClientConfig, rspackServerConfig]);
 
   compiler.watch({}, (error, stats) => {
     let messages;
@@ -53,7 +53,7 @@ const devServer = () => {
         `To ignore, add // eslint-disable-next-line to the line before.\n`,
       );
     } else {
-      console.info("Compiled successfully\n");
+      console.info("Compiled successfully with rspack\n");
     }
 
     if (serverInstance) {
@@ -80,4 +80,4 @@ const devServer = () => {
   }
 };
 
-devServer();
+rspackDevServer();

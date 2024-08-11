@@ -1,42 +1,35 @@
-const { rspack } = require("@rspack/core");
 const path = require("path");
 const { moduleFileExtensions } = require("./utils");
+const { ProgressPlugin } = require("webpack");
 
-/** @type {import('@rspack/cli').Configuration} */
-const rspackServerConfig = {
+/** @type {import('webpack').Configuration} */
+const webpackServerConfig = {
   mode: "development",
   bail: false,
   stats: "normal",
   devtool: "eval-source-map",
   target: "node",
   entry: {
-    server: {
-      import: path.resolve(__dirname, "server"),
-      filename: "server/index.js",
-    },
+    server: path.resolve(__dirname, "server"), // Simplified entry configuration for Webpack
   },
   output: {
     path: path.resolve(__dirname, "build"),
     clean: true,
+    filename: "server/index.js", // Set the output filename
     publicPath: "/",
   },
   optimization: {
-    minimize: false,
+    minimize: false, // Do not minimize for server-side code
   },
   resolve: {
     extensions: moduleFileExtensions.map((extension) => `.${extension}`),
   },
   module: {
-    parser: {
-      javascript: {
-        importExportsPresence: "error",
-      },
-    },
     rules: [
       {
         test: /\.(js)$/u,
         use: {
-          loader: "builtin:swc-loader",
+          loader: "swc-loader", // Use swc-loader for Webpack
           options: {
             sourceMap: true,
             jsc: {
@@ -52,7 +45,7 @@ const rspackServerConfig = {
       },
     ],
   },
-  plugins: [new rspack.ProgressPlugin()].filter(Boolean),
+  plugins: [new ProgressPlugin()].filter(Boolean),
 };
 
-module.exports = rspackServerConfig;
+module.exports = webpackServerConfig;

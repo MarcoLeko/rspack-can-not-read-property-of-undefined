@@ -1,9 +1,9 @@
-const rspack = require("@rspack/core");
 const path = require("path");
 const { moduleFileExtensions } = require("./utils");
+const { ProgressPlugin } = require("webpack");
 
-/** @type {import('@rspack/cli').Configuration} */
-const rspackClientConfig = {
+/** @type {import('webpack').Configuration} */
+const webpackClientConfig = {
   mode: "development",
   bail: false,
   stats: "normal",
@@ -21,16 +21,11 @@ const rspackClientConfig = {
     globalObject: "(typeof self != 'undefined' ? self : this)",
   },
   module: {
-    parser: {
-      javascript: {
-        importExportsPresence: "error",
-      },
-    },
     rules: [
       {
         test: /\.(js|jsx)$/u,
         use: {
-          loader: "builtin:swc-loader",
+          loader: "swc-loader", // Use swc-loader for Webpack
           options: {
             sourceMap: true,
             jsc: {
@@ -55,7 +50,7 @@ const rspackClientConfig = {
       },
     ],
   },
-  plugins: [new rspack.ProgressPlugin()].filter(Boolean),
+  plugins: [new ProgressPlugin()].filter(Boolean),
 };
 
-module.exports = rspackClientConfig;
+module.exports = webpackClientConfig;
