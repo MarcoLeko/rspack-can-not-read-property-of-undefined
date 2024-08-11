@@ -1,6 +1,6 @@
 import React from "react";
 
-// This code will fail with npm run rspack:dev:server as renderToString is unable to handle any react hooks: useState, useRef etc.  👇🏻
+// This code will fail as renderToString is unable to handle any react hooks: useState, useRef etc. 👇🏻
 function App(props) {
   const [number, setNumber] = React.useState(7);
   return (
@@ -19,7 +19,7 @@ function App(props) {
   );
 }
 
-// Uncomment the code below when running npm run rspack:dev:server as renderToString without react-hooks will work 👇🏻
+// Uncomment the code below works as renderToString is not parsing react-hooks 👇🏻
 
 // function App(props) {
 //   return (
