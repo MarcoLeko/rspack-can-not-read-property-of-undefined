@@ -11,13 +11,9 @@ const devServer = () => {
   let serverInstance = null;
 
   const launchServer = () => {
-    console.log(path.resolve(__dirname, "build", "server"));
-    serverInstance = childProcess.fork(
-      path.resolve(__dirname, "build", "server"),
-      {
-        stdio: "inherit",
-      },
-    );
+    serverInstance = childProcess.fork(path.join("build", "server"), {
+      stdio: "inherit",
+    });
   };
 
   const compiler = rspack([clientConfig, serverConfig]);
@@ -53,7 +49,7 @@ const devServer = () => {
         `\nSearch for the keywords to learn more about each warning.`,
       );
       console.log(
-        `To ignore, add ${"// eslint-disable-next-line"} to the line before.\n`,
+        `To ignore, add // eslint-disable-next-line to the line before.\n`,
       );
     } else {
       console.info("Compiled successfully\n");

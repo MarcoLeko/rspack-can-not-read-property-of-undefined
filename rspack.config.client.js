@@ -19,24 +19,6 @@ const clientConfig = {
     publicPath: "/",
     libraryTarget: "umd",
   },
-  externals: [
-    {
-      "react-dom": {
-        root: ["ReactDom"],
-        commonjs: "react-dom",
-        commonjs2: "react-dom",
-        amd: "react-dom",
-      },
-    },
-    {
-      react: {
-        root: ["React"],
-        commonjs: "react",
-        commonjs2: "react",
-        amd: "react",
-      },
-    },
-  ],
   module: {
     parser: {
       javascript: {

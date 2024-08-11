@@ -8,7 +8,7 @@ const serverConfig = {
   bail: false,
   stats: "normal",
   devtool: "eval-source-map",
-  target: "node", // in order to ignore built-in modules like path, fs, etc.
+  target: "node",
   entry: {
     server: {
       import: path.resolve(__dirname, "server"),
@@ -17,7 +17,6 @@ const serverConfig = {
   },
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "index.js",
     clean: true,
     publicPath: "/",
   },
