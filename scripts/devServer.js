@@ -7,6 +7,7 @@ const path = require("node:path");
 
 const isInteractive = process.stdout.isTTY;
 
+// Custom hot reloading dev server setup using the servers http server framework: Fastify
 const devServer = () => {
   let serverInstance = null;
 
