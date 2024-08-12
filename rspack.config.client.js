@@ -55,7 +55,7 @@ const rspackClientConfig = {
       },
     ],
   },
-  plugins: [new rspack.ProgressPlugin()].filter(Boolean),
+  plugins: [new rspack.ProgressPlugin()],
 };
 
 module.exports = rspackClientConfig;

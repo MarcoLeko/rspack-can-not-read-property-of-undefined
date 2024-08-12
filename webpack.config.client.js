@@ -50,7 +50,7 @@ const webpackClientConfig = {
       },
     ],
   },
-  plugins: [new ProgressPlugin()].filter(Boolean),
+  plugins: [new ProgressPlugin()],
 };
 
 module.exports = webpackClientConfig;

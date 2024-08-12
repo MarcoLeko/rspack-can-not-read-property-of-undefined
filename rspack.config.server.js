@@ -52,7 +52,7 @@ const rspackServerConfig = {
       },
     ],
   },
-  plugins: [new rspack.ProgressPlugin()].filter(Boolean),
+  plugins: [new rspack.ProgressPlugin()],
 };
 
 module.exports = rspackServerConfig;
