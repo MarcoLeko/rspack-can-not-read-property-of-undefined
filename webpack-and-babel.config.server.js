@@ -1,6 +1,7 @@
 const path = require("path");
 const { moduleFileExtensions } = require("./utils");
-const { ProgressPlugin } = require("webpack");
+const { ProgressPlugin, EnvironmentPlugin } = require("webpack");
+const nodeExternals = require("webpack-node-externals");
 
 /** @type {import('webpack').Configuration} */
 const webpackAndBabelServerConfig = {
@@ -18,6 +19,7 @@ const webpackAndBabelServerConfig = {
     filename: "server/index.js", // Set the output filename
     publicPath: "/",
   },
+  externals: [nodeExternals()],
   optimization: {
     minimize: false, // Do not minimize for server-side code
   },
@@ -38,7 +40,10 @@ const webpackAndBabelServerConfig = {
       },
     ],
   },
-  plugins: [new ProgressPlugin()],
+  plugins: [
+    new ProgressPlugin(),
+    new EnvironmentPlugin(Object.keys(process.env)),
+  ],
 };
 
 module.exports = webpackAndBabelServerConfig;

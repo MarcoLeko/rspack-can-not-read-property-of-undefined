@@ -1,6 +1,7 @@
 const path = require("path");
 const { moduleFileExtensions } = require("./utils");
-const { ProgressPlugin } = require("webpack");
+const { ProgressPlugin, EnvironmentPlugin } = require("webpack");
+const nodeExternals = require("webpack-node-externals");
 
 /** @type {import('webpack').Configuration} */
 const webpackServerConfig = {
@@ -12,6 +13,7 @@ const webpackServerConfig = {
   entry: {
     server: path.resolve(__dirname, "server"), // Simplified entry configuration for Webpack
   },
+  externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, "build"),
     clean: true,
@@ -45,7 +47,10 @@ const webpackServerConfig = {
       },
     ],
   },
-  plugins: [new ProgressPlugin()],
+  plugins: [
+    new ProgressPlugin(),
+    new EnvironmentPlugin(Object.keys(process.env)),
+  ],
 };
 
 module.exports = webpackServerConfig;
