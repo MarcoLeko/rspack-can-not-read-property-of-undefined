@@ -70,18 +70,6 @@ const webpackAndBabelClientConfig = {
       commonjs2: "react-dom",
       amd: "react-dom",
     },
-    "react-intl": {
-      root: ["ReactIntl"],
-      commonjs: "react-intl",
-      commonjs2: "react-intl",
-      amd: "react-intl",
-    },
-    "react/jsx-runtime": {
-      root: ["jsx"],
-      commonjs: "react/jsx-runtime",
-      commonjs2: "react/jsx-runtime",
-      amd: "react/jsx-runtime",
-    },
   },
   module: {
     rules: [

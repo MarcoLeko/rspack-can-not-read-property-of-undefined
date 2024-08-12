@@ -33,12 +33,6 @@ const webpackClientConfig = {
       commonjs2: "react-dom",
       amd: "react-dom",
     },
-    "react/jsx-runtime": {
-      root: ["jsx"],
-      commonjs: "react/jsx-runtime",
-      commonjs2: "react/jsx-runtime",
-      amd: "react/jsx-runtime",
-    },
   },
   module: {
     rules: [

@@ -19,22 +19,4 @@ function App(props) {
   );
 }
 
-// Uncomment the code below works as renderToString is not parsing react-hooks 👇🏻
-
-// function App(props) {
-//   return (
-//     <div>
-//       <header>
-//         <p>
-//           Hey ho <code>welcome</code> to my reproducible bug. These are my
-//           passed props {JSON.stringify(props)}
-//         </p>
-//         <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-//           Learn My lucky number 7
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
 export { App };
