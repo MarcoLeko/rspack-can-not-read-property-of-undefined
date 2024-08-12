@@ -4,7 +4,7 @@ const rspackServerConfig = require("../rspack.config.server");
 const devServer = require("./devServer");
 
 const rspackDevServer = () => {
-  devServer(rspack, rspackClientConfig, rspackServerConfig);
+  devServer(rspack, rspackClientConfig, rspackServerConfig, "rspack");
 };
 
 rspackDevServer();

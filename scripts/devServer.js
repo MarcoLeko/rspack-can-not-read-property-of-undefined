@@ -5,7 +5,7 @@ const path = require("node:path");
 const isInteractive = process.stdout.isTTY;
 
 // Custom hot reloading dev server setup using the servers http server framework: Fastify
-const devServer = (bundler, clientConfig, serverConfig) => {
+const devServer = (bundler, clientConfig, serverConfig, configName) => {
   let serverInstance = null;
 
   const launchServer = () => {
@@ -50,7 +50,7 @@ const devServer = (bundler, clientConfig, serverConfig) => {
         `To ignore, add // eslint-disable-next-line to the line before.\n`,
       );
     } else {
-      console.info(`Compiled successfully with ${bundler.name}\n`);
+      console.info(`Compiled successfully with ${configName}\n`);
     }
 
     if (serverInstance) {

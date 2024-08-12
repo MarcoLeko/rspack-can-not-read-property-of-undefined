@@ -4,7 +4,7 @@ const webpackServerConfig = require("../webpack.config.server");
 const devServer = require("./devServer");
 
 const webpackDevServer = () => {
-  devServer(webpack, webpackClientConfig, webpackServerConfig);
+  devServer(webpack, webpackClientConfig, webpackServerConfig, "webpack");
 };
 
 webpackDevServer();
