@@ -29,7 +29,7 @@ const webpackAndBabelServerConfig = {
   module: {
     rules: [
       {
-        test: /\.(js|mjs|jsx|cjs|)$/u,
+        test: /\.(js|mjs|jsx|ts|tsx|cjs|mts|cts)$/u,
         include: [path.resolve(__dirname, "server")],
         loader: require.resolve("babel-loader"),
         options: {

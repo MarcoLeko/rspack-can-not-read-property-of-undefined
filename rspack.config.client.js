@@ -20,6 +20,26 @@ const rspackClientConfig = {
     libraryTarget: "umd",
     globalObject: "(typeof self != 'undefined' ? self : this)",
   },
+  externals: {
+    react: {
+      root: ["React"],
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "react",
+    },
+    "react-dom": {
+      root: ["ReactDom"],
+      commonjs: "react-dom",
+      commonjs2: "react-dom",
+      amd: "react-dom",
+    },
+    "react/jsx-runtime": {
+      root: ["jsx"],
+      commonjs: "react/jsx-runtime",
+      commonjs2: "react/jsx-runtime",
+      amd: "react/jsx-runtime",
+    },
+  },
   module: {
     parser: {
       javascript: {
