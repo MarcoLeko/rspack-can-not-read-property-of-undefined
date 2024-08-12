@@ -1,6 +1,6 @@
-import React, { startTransition } from "react";
-import { render } from "react-dom";
-import { createRoot, hydrateRoot } from "react-dom/client";
+import React from "react";
+import { hydrate, render } from "react-dom";
+import { createRoot } from "react-dom/client";
 
 export function createFragment(RootComponent) {
   const Fragment = ({ rootComponentProps }) => {
@@ -36,11 +36,7 @@ export function createFragment(RootComponent) {
 
     const fragment = <Fragment rootComponentProps={rootComponentProps} />;
 
-    const hydrateFunction = () => {
-      hydrateRoot(rootElement, fragment);
-    };
-
-    startTransition(hydrateFunction);
+    hydrate(fragment, rootElement);
   }
 
   return { Fragment, init, render: renderFunction };

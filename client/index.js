@@ -1,6 +1,6 @@
 import { App } from "./App";
 import { createFragment } from "./createFragment";
 
-const { Fragment } = createFragment(App);
+const { Fragment, init } = createFragment(App);
 
-export { Fragment };
+export { Fragment, init };
