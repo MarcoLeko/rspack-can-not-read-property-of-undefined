@@ -1,6 +1,7 @@
 const { rspack } = require("@rspack/core");
 const path = require("path");
 const { moduleFileExtensions } = require("./utils");
+const nodeExternals = require("webpack-node-externals");
 
 /** @type {import('@rspack/cli').Configuration} */
 const rspackServerConfig = {
@@ -15,6 +16,7 @@ const rspackServerConfig = {
       filename: "server/index.js",
     },
   },
+  externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, "build"),
     clean: true,

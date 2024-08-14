@@ -24,7 +24,6 @@ export function createFragment(RootComponent) {
     createRoot(rootElement).render(Fragment);
   }
 
-  // this will be called at initialization for making the JS interactive irrelevant for the bug
   async function init(rootElement) {
     const fragmentData = window?.custom?.data?.fragment;
 
@@ -36,9 +35,7 @@ export function createFragment(RootComponent) {
       );
     }
 
-    const fragment = <Fragment rootComponentProps={rootComponentProps} />;
-
-    hydrate(fragment, rootElement);
+    hydrate(<Fragment rootComponentProps={rootComponentProps} />, rootElement);
   }
 
   return { Fragment, init, render: renderFunction };

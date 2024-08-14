@@ -1,6 +1,5 @@
 import React from "react";
 
-// This code will fail as renderToString is unable to handle any react hooks: useState, useRef etc. 👇🏻
 function App(props) {
   const [number, setNumber] = React.useState(7);
   return (
