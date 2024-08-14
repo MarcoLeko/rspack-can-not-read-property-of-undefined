@@ -6,12 +6,12 @@ function App(props) {
     <div>
       <header>
         <p>
-          Hey ho <code>welcome</code> to my reproducible bug. These are my
+          Hey ho <code>welcome</code> to JSMDs blueprint setup. These are my
           passed props {JSON.stringify(props)}
         </p>
         <button onClick={() => setNumber(number + 1)}>Increment number</button>
         <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn My lucky number {number}
+          Bump your lucky number {number}
         </a>
       </header>
     </div>
