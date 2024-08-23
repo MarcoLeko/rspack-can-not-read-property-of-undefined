@@ -8,7 +8,6 @@ const webpackAndBabelServerConfig = {
   mode: "development",
   bail: false,
   stats: "normal",
-  devtool: "eval-source-map",
   target: "node",
   entry: {
     server: path.resolve(__dirname, "server"), // Simplified entry configuration for Webpack

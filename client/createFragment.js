@@ -1,6 +1,5 @@
 import React from "react";
-import { hydrate, render } from "react-dom";
-import { createRoot } from "react-dom/client";
+import { hydrateRoot } from "react-dom/client";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { fragmentContext } from "./context";
 
@@ -15,19 +14,8 @@ export function createFragment(RootComponent) {
     );
   };
 
-  async function renderFunction(
-    rootElement,
-    { baseUrl = "/", locale, rootComponentProps, sentry, tenant },
-  ) {
-    if (!rootElement) return;
-
-    createRoot(rootElement).render(Fragment);
-  }
-
   async function init(rootElement) {
-    const fragmentData = window?.custom?.data?.fragment;
-
-    const { rootComponentProps } = fragmentData;
+    const { rootComponentProps } = window?.custom?.data;
 
     if (!rootElement) {
       throw new Error(
@@ -35,8 +23,11 @@ export function createFragment(RootComponent) {
       );
     }
 
-    hydrate(<Fragment rootComponentProps={rootComponentProps} />, rootElement);
+    hydrateRoot(
+      rootElement,
+      <Fragment rootComponentProps={rootComponentProps} />,
+    );
   }
 
-  return { Fragment, init, render: renderFunction };
+  return { Fragment, init };
 }

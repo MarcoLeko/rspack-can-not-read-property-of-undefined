@@ -1,13 +1,14 @@
 const rspack = require("@rspack/core");
 const path = require("path");
 const { moduleFileExtensions } = require("./utils");
+const { EnvironmentPlugin } = require("@rspack/core");
 
 /** @type {import('@rspack/cli').Configuration} */
 const rspackClientConfig = {
   mode: "development",
   bail: false,
   stats: "normal",
-  devtool: "eval-source-map",
+  devtool: "source-map",
   resolve: {
     extensions: moduleFileExtensions.map((extension) => `.${extension}`),
   },
@@ -69,7 +70,10 @@ const rspackClientConfig = {
       },
     ],
   },
-  plugins: [new rspack.ProgressPlugin()],
+  plugins: [
+    new rspack.ProgressPlugin(),
+    new EnvironmentPlugin(Object.keys(process.env)),
+  ],
 };
 
 module.exports = rspackClientConfig;

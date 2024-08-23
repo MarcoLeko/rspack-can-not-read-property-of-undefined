@@ -1,4 +1,4 @@
-const { rspack } = require("@rspack/core");
+const { rspack, EnvironmentPlugin } = require("@rspack/core");
 const path = require("path");
 const { moduleFileExtensions } = require("./utils");
 const nodeExternals = require("webpack-node-externals");
@@ -8,7 +8,6 @@ const rspackServerConfig = {
   mode: "development",
   bail: false,
   stats: "normal",
-  devtool: "eval-source-map",
   target: "node",
   entry: {
     server: {
@@ -54,7 +53,10 @@ const rspackServerConfig = {
       },
     ],
   },
-  plugins: [new rspack.ProgressPlugin()],
+  plugins: [
+    new rspack.ProgressPlugin(),
+    new EnvironmentPlugin(Object.keys(process.env)),
+  ],
 };
 
 module.exports = rspackServerConfig;
