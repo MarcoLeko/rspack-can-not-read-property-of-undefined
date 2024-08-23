@@ -8,31 +8,38 @@ const rspackClientConfig = {
   mode: "development",
   bail: false,
   stats: "normal",
-  devtool: "source-map",
   resolve: {
     extensions: moduleFileExtensions.map((extension) => `.${extension}`),
   },
-  entry: path.resolve(__dirname, "client", "index.js"),
+  entry: {
+    index: path.resolve(__dirname, "client", "index.js"),
+    hydrator: path.resolve(__dirname, "client", "hydrator.js"),
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    filename: "index.js",
-    publicPath: "/",
+    library: ["hydrator", "[name]"],
     libraryTarget: "umd",
     globalObject: "(typeof self != 'undefined' ? self : this)",
   },
   externals: {
     react: {
-      root: ["React"],
+      root: ["hydrator", "React"],
       commonjs: "react",
       commonjs2: "react",
       amd: "react",
     },
     "react-dom": {
-      root: ["ReactDom"],
+      root: ["hydrator", "ReactDOM"],
       commonjs: "react-dom",
       commonjs2: "react-dom",
       amd: "react-dom",
+    },
+    "react/jsx-runtime": {
+      root: ["hydrator", "jsx"],
+      commonjs: "react/jsx-runtime",
+      commonjs2: "react/jsx-runtime",
+      amd: "react/jsx-runtime",
     },
   },
   module: {

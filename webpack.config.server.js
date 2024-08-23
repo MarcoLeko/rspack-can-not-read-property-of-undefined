@@ -10,17 +10,17 @@ const webpackServerConfig = {
   stats: "normal",
   target: "node",
   entry: {
-    server: path.resolve(__dirname, "server"), // Simplified entry configuration for Webpack
+    server: path.resolve(__dirname, "server"),
   },
   externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, "build"),
     clean: true,
-    filename: "server/index.js", // Set the output filename
+    filename: "server/index.js",
     publicPath: "/",
   },
   optimization: {
-    minimize: false, // Do not minimize for server-side code
+    minimize: false,
   },
   resolve: {
     extensions: moduleFileExtensions.map((extension) => `.${extension}`),

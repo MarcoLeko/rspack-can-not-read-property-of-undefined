@@ -1,13 +1,12 @@
 const path = require("path");
 const { moduleFileExtensions } = require("./utils");
-const { ProgressPlugin } = require("webpack");
+const { ProgressPlugin, EnvironmentPlugin } = require("webpack");
 
 /** @type {import('webpack').Configuration} */
 const webpackClientConfig = {
   mode: "development",
   bail: false,
   stats: "normal",
-  devtool: "source-map",
   resolve: {
     extensions: moduleFileExtensions.map((extension) => `.${extension}`),
   },
@@ -18,7 +17,6 @@ const webpackClientConfig = {
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    sourceMapFilename: "[name].js.map",
     library: ["hydrator", "[name]"],
     libraryTarget: "umd",
     globalObject: "(typeof self != 'undefined' ? self : this)",
@@ -48,7 +46,7 @@ const webpackClientConfig = {
       {
         test: /\.(js|jsx)$/u,
         use: {
-          loader: "swc-loader", // Use swc-loader for Webpack
+          loader: "swc-loader",
           options: {
             sourceMap: true,
             jsc: {
