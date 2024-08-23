@@ -7,6 +7,7 @@ const webpackClientConfig = {
   mode: "development",
   bail: false,
   stats: "normal",
+  devtool: "source-map",
   resolve: {
     extensions: moduleFileExtensions.map((extension) => `.${extension}`),
   },
@@ -17,6 +18,7 @@ const webpackClientConfig = {
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    sourceMapFilename: "[name].js.map",
     library: ["hydrator", "[name]"],
     libraryTarget: "umd",
     globalObject: "(typeof self != 'undefined' ? self : this)",
