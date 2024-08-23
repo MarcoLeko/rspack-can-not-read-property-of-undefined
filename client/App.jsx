@@ -1,11 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 function App(props) {
   const [number, setNumber] = React.useState(7);
-
-  useEffect(() => {
-    setNumber(number + 1);
-  }, []);
 
   return (
     <div>
