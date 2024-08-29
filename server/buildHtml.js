@@ -15,11 +15,11 @@ function buildHtml(scriptPath, body, initialData) {
     <script src="hydrator.js"></script>
     <script src="index.js"></script>
     <script defer>
-    window.addEventListener("DOMContentLoaded", function (e) {
-        window.custom = { data: ${initialData} };
-        const root = document.querySelector("#root");
-        window.hydrator.index.init(document.querySelector("#root"));
-    });
+        window.addEventListener("DOMContentLoaded", function (e) {
+            window.custom = { data: ${initialData} };
+            const root = document.querySelector("#root");
+            window.hydrator.index.init(document.querySelector("#root"));
+        });
     </script>
   </body>
 </html>

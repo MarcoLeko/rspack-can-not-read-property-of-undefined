@@ -72,6 +72,16 @@ const rspackClientConfig = {
                   useBuiltins: false,
                 },
               },
+              experimental: {
+                plugins: [
+                  [
+                    "@formatjs/swc-plugin-experimental",
+                    {
+                      idInterpolationPattern: "[sha512:contenthash:base64:6]",
+                    },
+                  ],
+                ],
+              },
             },
           },
         },
