@@ -14,6 +14,7 @@ function buildHtml(scriptPath, body, initialData) {
     <div id="root">${body}</div>
     <script src="hydrator.js"></script>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="app.css">
     <script defer>
         window.addEventListener("DOMContentLoaded", function (e) {
             window.custom = { data: ${initialData} };

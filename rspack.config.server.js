@@ -15,6 +15,9 @@ const rspackServerConfig = {
       filename: "server/index.js",
     },
   },
+  experiments: {
+    css: true,
+  },
   externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, "build"),
@@ -31,6 +34,16 @@ const rspackServerConfig = {
     parser: {
       javascript: {
         importExportsPresence: "error",
+      },
+      "css/auto": {
+        namedExports: false,
+      },
+      css: {
+        namedExports: false,
+      },
+      // Parser options for css/module modules
+      "css/module": {
+        namedExports: false,
       },
     },
     rules: [
@@ -51,11 +64,25 @@ const rspackServerConfig = {
         },
         type: "javascript/auto",
       },
+      {
+        test: /\.(scss|sass)$/u,
+        use: [
+          {
+            loader: "sass-loader",
+            options: {
+              api: "modern-compiler",
+              sourceMap: true,
+            },
+          },
+        ],
+        type: "css/auto",
+      },
     ],
   },
   plugins: [
     new rspack.ProgressPlugin(),
     new EnvironmentPlugin(Object.keys(process.env)),
+    new rspack.CssExtractRspackPlugin(),
   ],
 };
 

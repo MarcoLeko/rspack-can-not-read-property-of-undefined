@@ -1,10 +1,13 @@
 import React from "react";
+import styles from "./app.scss";
+
+console.log(styles);
 
 function App(props) {
   const [number, setNumber] = React.useState(7);
 
   return (
-    <div>
+    <div className={styles.bgPurple}>
       <header>
         <p>
           Hey ho <code>welcome</code> to JSMDs blueprint setup. These are my

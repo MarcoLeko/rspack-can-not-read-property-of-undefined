@@ -12,14 +12,18 @@ const rspackClientConfig = {
   resolve: {
     extensions: moduleFileExtensions.map((extension) => `.${extension}`),
   },
+  experiments: {
+    css: true,
+  },
   entry: {
     index: path.resolve(__dirname, "client", "index.js"),
     hydrator: path.resolve(__dirname, "client", "hydrator.js"),
   },
   output: {
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
     clean: true,
-    sourceMapFilename: "[name].js.map",
+    sourceMapFilename: "[name][ext].map",
     library: ["hydrator", "[name]"],
     libraryTarget: "umd",
     globalObject: "(typeof self != 'undefined' ? self : this)",
@@ -48,6 +52,16 @@ const rspackClientConfig = {
     parser: {
       javascript: {
         importExportsPresence: "error",
+      },
+      "css/auto": {
+        namedExports: false,
+      },
+      css: {
+        namedExports: false,
+      },
+      // Parser options for css/module modules
+      "css/module": {
+        namedExports: false,
       },
     },
     rules: [
@@ -87,11 +101,25 @@ const rspackClientConfig = {
         },
         type: "javascript/auto",
       },
+      {
+        test: /\.(scss|sass)$/u,
+        use: [
+          {
+            loader: "sass-loader",
+            options: {
+              api: "modern-compiler",
+              sourceMap: true,
+            },
+          },
+        ],
+        type: "css/auto",
+      },
     ],
   },
   plugins: [
     new rspack.ProgressPlugin(),
     new EnvironmentPlugin(Object.keys(process.env)),
+    new rspack.CssExtractRspackPlugin(),
   ],
 };
 
