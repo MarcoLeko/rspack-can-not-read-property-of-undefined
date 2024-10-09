@@ -82,7 +82,6 @@ const rspackServerConfig = {
   plugins: [
     new rspack.ProgressPlugin(),
     new EnvironmentPlugin(Object.keys(process.env)),
-    new rspack.CssExtractRspackPlugin(),
   ],
 };
 

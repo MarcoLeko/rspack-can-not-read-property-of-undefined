@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./app.scss";
 
-console.log(styles);
-
 function App(props) {
   const [number, setNumber] = React.useState(7);
 
