@@ -2,6 +2,7 @@ const rspack = require("@rspack/core");
 const path = require("path");
 const { moduleFileExtensions } = require("./utils");
 const { EnvironmentPlugin } = require("@rspack/core");
+const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 
 /** @type {import('@rspack/cli').Configuration} */
 const rspackClientConfig = {
@@ -11,9 +12,6 @@ const rspackClientConfig = {
   devtool: "source-map",
   resolve: {
     extensions: moduleFileExtensions.map((extension) => `.${extension}`),
-  },
-  experiments: {
-    css: true,
   },
   entry: {
     index: path.resolve(__dirname, "client", "index.js"),
@@ -48,20 +46,13 @@ const rspackClientConfig = {
       amd: "react/jsx-runtime",
     },
   },
+  optimization: {
+    sideEffects: true,
+  },
   module: {
     parser: {
       javascript: {
         importExportsPresence: "error",
-      },
-      "css/auto": {
-        namedExports: false,
-      },
-      css: {
-        namedExports: false,
-      },
-      // Parser options for css/module modules
-      "css/module": {
-        namedExports: false,
       },
     },
     rules: [
@@ -70,12 +61,24 @@ const rspackClientConfig = {
         use: {
           loader: "builtin:swc-loader",
           options: {
+            baseUrl: ".",
             sourceMap: true,
+            isModule: true,
+            module: {
+              type: "commonjs",
+            },
             jsc: {
               target: "es2020",
+              minify: {
+                compress: true,
+                mangle: true,
+              },
               parser: {
                 syntax: "ecmascript",
                 jsx: true,
+                decorators: true,
+                importMeta: true,
+                dynamicImport: true,
               },
               externalHelpers: true,
               preserveAllComments: false,
@@ -102,23 +105,36 @@ const rspackClientConfig = {
         type: "javascript/auto",
       },
       {
-        test: /\.(scss|sass)$/u,
+        test: /\.css$/,
         use: [
           {
-            loader: "sass-loader",
+            loader: rspack.CssExtractRspackPlugin.loader,
             options: {
-              api: "modern-compiler",
+              defaultExport: true,
+            },
+          },
+          {
+            loader: "css-loader",
+            options: {
+              esModule: true,
+              modules: {
+                namedExport: false,
+                getLocalIdent: function foo(...args) {
+                  return `${getCSSModuleLocalIdent(...args)}`;
+                },
+              },
               sourceMap: true,
+              importLoaders: 1,
             },
           },
         ],
-        type: "css/auto",
       },
     ],
   },
   plugins: [
     new rspack.ProgressPlugin(),
     new EnvironmentPlugin(Object.keys(process.env)),
+    new rspack.CssExtractRspackPlugin({}),
   ],
 };
 

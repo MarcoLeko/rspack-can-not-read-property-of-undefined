@@ -2,6 +2,7 @@ const path = require("path");
 const { moduleFileExtensions } = require("./utils");
 const { ProgressPlugin, EnvironmentPlugin } = require("webpack");
 const nodeExternals = require("webpack-node-externals");
+const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 
 /** @type {import('webpack').Configuration} */
 const webpackAndBabelServerConfig = {
@@ -36,6 +37,31 @@ const webpackAndBabelServerConfig = {
           configFile: false,
           presets: [[require.resolve("./babel/server")]],
         },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              esModule: true,
+            },
+          },
+          {
+            loader: "css-loader",
+            options: {
+              esModule: true,
+              modules: {
+                namedExport: false,
+                getLocalIdent: function foo(...args) {
+                  return `marco__${getCSSModuleLocalIdent(...args)}`;
+                },
+              },
+              sourceMap: true,
+              importLoaders: 1,
+            },
+          },
+        ],
       },
     ],
   },
