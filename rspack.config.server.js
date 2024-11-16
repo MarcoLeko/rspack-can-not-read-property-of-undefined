@@ -51,6 +51,16 @@ const rspackServerConfig = {
                 jsx: false,
               },
             },
+            experimental: {
+              plugins: [
+                [
+                  "@formatjs/swc-plugin-experimental",
+                  {
+                    idInterpolationPattern: "[sha512:contenthash:base64:6]",
+                  },
+                ],
+              ],
+            },
           },
         },
         type: "javascript/auto",

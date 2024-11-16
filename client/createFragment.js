@@ -2,14 +2,17 @@ import React from "react";
 import { hydrateRoot } from "react-dom/client";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { fragmentContext } from "./context";
+import { IntlProvider } from "react-intl";
 
 export function createFragment(RootComponent) {
   const Fragment = ({ rootComponentProps }) => {
     return (
       <ErrorBoundary>
-        <fragmentContext.Provider value={{ ...rootComponentProps }}>
-          <RootComponent {...rootComponentProps} />
-        </fragmentContext.Provider>
+        <IntlProvider locale={"de"} defaultLocale="de">
+          <fragmentContext.Provider value={{ ...rootComponentProps }}>
+            <RootComponent {...rootComponentProps} />
+          </fragmentContext.Provider>
+        </IntlProvider>
       </ErrorBoundary>
     );
   };

@@ -9,12 +9,13 @@ function buildHtml(scriptPath, body, initialData) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react-intl@6.4.6/react-intl.iife.js"></script>
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <div id="root">${body}</div>
     <script src="hydrator.js"></script>
     <script src="index.js"></script>
+    <div id="root">${body}</div>
     <script defer>
         window.addEventListener("DOMContentLoaded", function (e) {
             window.custom = { data: ${initialData} };

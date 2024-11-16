@@ -39,6 +39,12 @@ const rspackClientConfig = {
       commonjs2: "react-dom",
       amd: "react-dom",
     },
+    "react-intl": {
+      root: ["hydrator", "ReactIntl"],
+      commonjs: "react-intl",
+      commonjs2: "react-intl",
+      amd: "react-intl",
+    },
     "react/jsx-runtime": {
       root: ["hydrator", "jsx"],
       commonjs: "react/jsx-runtime",
