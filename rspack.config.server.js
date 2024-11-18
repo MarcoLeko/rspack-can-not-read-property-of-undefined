@@ -54,7 +54,7 @@ const rspackServerConfig = {
             experimental: {
               plugins: [
                 [
-                  "@formatjs/swc-plugin-experimental",
+                  "@swc/plugin-formatjs",
                   {
                     idInterpolationPattern: "[sha512:contenthash:base64:6]",
                   },

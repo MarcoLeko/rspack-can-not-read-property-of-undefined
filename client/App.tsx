@@ -1,6 +1,13 @@
 import React from "react";
 import styles from "./app.module.css";
-import { FormattedMessage, useIntl } from "react-intl";
+import { defineMessages, FormattedMessage, useIntl } from "react-intl";
+
+const messages = defineMessages({
+  someText: {
+    defaultMessage:
+      "<b>Some text with rich-text element in bold. - ööö</b> Non bold text - from hook",
+  },
+});
 
 const BoldComponent = (chunks) => <b>{chunks}</b>;
 
@@ -26,10 +33,13 @@ function App(props) {
         <br />
         <FormattedMessage
           defaultMessage={
-            "<b>Some text with rich-text element in bold.</b> Non bold text"
+            "<b>Some text with rich-text element in bold.</b> Non bold text - from component"
           }
           values={{ b: BoldComponent }}
         />
+        <br />
+        <br />
+        <div>{intl.formatMessage(messages.someText, { b: BoldComponent })}</div>
         <br />
         <br />
         <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">

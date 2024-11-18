@@ -63,7 +63,7 @@ const rspackClientConfig = {
     },
     rules: [
       {
-        test: /\.(js|jsx)$/u,
+        test: /\.(js|jsx|tsx)$/u,
         use: {
           loader: "builtin:swc-loader",
           options: {
@@ -80,8 +80,8 @@ const rspackClientConfig = {
                 mangle: true,
               },
               parser: {
-                syntax: "ecmascript",
-                jsx: true,
+                syntax: "typescript",
+                tsx: true,
                 decorators: true,
                 importMeta: true,
                 dynamicImport: true,
@@ -98,7 +98,7 @@ const rspackClientConfig = {
               experimental: {
                 plugins: [
                   [
-                    "@formatjs/swc-plugin-experimental",
+                    "@swc/plugin-formatjs",
                     {
                       idInterpolationPattern: "[sha512:contenthash:base64:6]",
                     },
